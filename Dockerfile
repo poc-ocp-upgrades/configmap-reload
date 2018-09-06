@@ -7,7 +7,6 @@ COPY . $GOPATH/src/github.com/jimmidyson/configmap-reload
 
 RUN yum install -y golang make git && \
    cd $GOPATH/src/github.com/jimmidyson/configmap-reload && \
-   curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh && \
    PATH=$PATH:$GOPATH/bin make out/configmap-reload-linux-amd64 GOPATH=$GOPATH && cp $GOPATH/src/github.com/jimmidyson/configmap-reload/out/configmap-reload-linux-amd64 /usr/bin/configmap-reload && \
    yum erase -y golang make && yum clean all
 
