@@ -7,7 +7,7 @@ COPY . $GOPATH/src/github.com/jimmidyson/configmap-reload
 
 RUN yum install -y golang make git && \
    cd $GOPATH/src/github.com/jimmidyson/configmap-reload && \
-   PATH=$PATH:$GOPATH/bin make out/configmap-reload-linux-`go env GOARCH` GOPATH=$GOPATH && cp $GOPATH/src/github.com/jimmidyson/configmap-reload/out/configmap-reload-linux-`go env GOARCH` /usr/bin/configmap-reload && \
+   PATH=$PATH:$GOPATH/bin make out/configmap-reload-linux-$(go env GOARCH) GOPATH=$GOPATH && cp $GOPATH/src/github.com/jimmidyson/configmap-reload/out/configmap-reload-linux-$(go env GOARCH) /usr/bin/configmap-reload && \
    yum erase -y golang make && yum clean all
 
 LABEL io.k8s.display-name="configmap reload" \
