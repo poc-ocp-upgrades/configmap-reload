@@ -41,6 +41,13 @@ out/configmap-reload-linux-ppc64le: configmap-reload.go $(shell $(SRCFILES))
 	$(MKGOPATH)
 	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 GOARCH=ppc64le GOOS=linux go build --installsuffix cgo -ldflags="$(LDFLAGS)" -a -o $(BUILD_DIR)/configmap-reload-linux-ppc64le configmap-reload.go
 
+out/configmap-reload-linux-arm64: configmap-reload.go $(shell $(SRCFILES))
+	$(MKGOPATH)
+	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 GOARCH=arm64 GOOS=linux go build --installsuffix cgo -ldflags="$(LDFLAGS)" -a -o $(BUILD_DIR)/configmap-reload-linux-arm64 configmap-reload.go
+
+out/configmap-reload-linux-s390x: configmap-reload.go $(shell $(SRCFILES))
+	$(MKGOPATH)
+	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 GOARCH=s390x GOOS=linux go build --installsuffix cgo -ldflags="$(LDFLAGS)" -a -o $(BUILD_DIR)/configmap-reload-linux-s390x configmap-reload.go
 
 out/configmap-reload-darwin-amd64: configmap-reload.go $(shell $(SRCFILES))
 	$(MKGOPATH)
@@ -55,7 +62,7 @@ out/configmap-reload-windows-amd64.exe: configmap-reload.go $(shell $(SRCFILES))
 	cd $(GOPATH)/src/$(REPOPATH) && CGO_ENABLED=0 GOARCH=amd64 GOOS=windows go build --installsuffix cgo -ldflags="$(LDFLAGS)" -a -o $(BUILD_DIR)/configmap-reload-windows-amd64.exe configmap-reload.go
 
 .PHONY: cross
-cross: out/configmap-reload-linux-amd64 out/configmap-reload-darwin-amd64 out/configmap-reload-windows-amd64.exe
+cross: out/configmap-reload-linux-s390x out/configmap-reload-linux-ppc64le out/configmap-reload-linux-arm64 out/configmap-reload-linux-amd64 out/configmap-reload-darwin-amd64 out/configmap-reload-windows-amd64.exe
 
 .PHONY: checksum
 checksum:
