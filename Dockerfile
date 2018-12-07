@@ -8,7 +8,7 @@ COPY . $GOPATH/src/github.com/jimmidyson/configmap-reload
 RUN yum install -y golang make git && \
    cd $GOPATH/src/github.com/jimmidyson/configmap-reload && \
    PATH=$PATH:$GOPATH/bin make out/configmap-reload GOPATH=$GOPATH && cp $GOPATH/src/github.com/jimmidyson/configmap-reload/out/configmap-reload /usr/bin/configmap-reload && \
-   yum erase -y golang make && yum clean all
+   yum autoremove -y golang make git && yum clean all
 
 LABEL io.k8s.display-name="configmap reload" \
       io.k8s.description="This is a component reloads another process if a configured configmap volume is remounted." \
